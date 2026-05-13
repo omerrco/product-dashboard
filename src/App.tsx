@@ -10,6 +10,7 @@ import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import AppLayout from "./ui/layout/AppLayout";
 import { ServiceError } from "./ui/ServiceError";
 import ProductEditPage from "./pages/ProductEditPage";
+import ProductCreatePage from "./pages/ProductCreatePage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -44,6 +45,7 @@ function App() {
           <Route path="dashboard" element={<DashboardPage />} />
           <Route path="products" element={<ProductsPage />} />
           <Route path="products/:productId" element={<ProductPage />} />
+          <Route path="products/newProduct" element={<ProductCreatePage />} />
           <Route
             path="products/:productId/edit"
             element={<ProductEditPage />}

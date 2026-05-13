@@ -1,9 +1,11 @@
-import { LuChevronDown, LuSearch } from "react-icons/lu";
-import { useSearchParams } from "react-router-dom";
+import { LuChevronDown, LuPlus, LuSearch } from "react-icons/lu";
+import { useNavigate, useSearchParams } from "react-router-dom";
 import { setParam } from "../../utils/helpers";
 import useCategories from "./useCategories";
+import Button from "../../ui/Button";
 
 export default function ProductsTableOperations() {
+  const navigate = useNavigate();
   const [searchParams, setSearchParams] = useSearchParams();
   const { categories, isPending } = useCategories();
 
@@ -20,6 +22,10 @@ export default function ProductsTableOperations() {
 
   return (
     <div className="flex items-center gap-4">
+      <Button onClick={() => navigate("/products/newProduct")}>
+        <LuPlus />
+      </Button>
+
       <div className="relative">
         <span className="pointer-events-none absolute top-1/2 left-4 -translate-y-1/2 text-slate-500">
           <LuSearch />
