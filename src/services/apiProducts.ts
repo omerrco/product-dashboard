@@ -101,14 +101,14 @@ export async function deleteProduct(productId: string): Promise<void> {
   }
 }
 
-type UpdateProductPayload = Pick<
+type ProductPayload = Pick<
   Product,
   "name" | "description" | "category_id" | "price" | "stock" | "status"
 >;
 
 type UpdateProductProps = {
   productId: string;
-  values: UpdateProductPayload;
+  values: ProductPayload;
 };
 
 export async function updateProduct({ productId, values }: UpdateProductProps) {
@@ -123,6 +123,28 @@ export async function updateProduct({ productId, values }: UpdateProductProps) {
     if (error) {
       throw new ServiceError(
         "Product could not be updated. Please try again.",
+        "DATABASE",
+        error,
+      );
+    }
+
+    return data;
+  } catch (error) {
+    normalizeServiceError(error);
+  }
+}
+
+export async function createProduct(values: ProductPayload) {
+  try {
+    const { data, error } = await supabase
+      .from("products")
+      .insert(values)
+      .select("*, categories!inner (id, name, slug)")
+      .single();
+
+    if (error) {
+      throw new ServiceError(
+        "Product could not be created. Please try again.",
         "DATABASE",
         error,
       );
