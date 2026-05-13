@@ -79,6 +79,7 @@ export default function ProductEditPage() {
         product={product}
         onSubmit={handleSubmit}
         isSubmitting={isUpdating}
+        submitLabel="Save changes"
       />
     </section>
   );
