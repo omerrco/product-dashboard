@@ -1,3 +1,4 @@
+import type { Product } from "../types/productType";
 import { ServiceError } from "../ui/ServiceError";
 import { PAGE_SIZE } from "../utils/constants";
 import { normalizeServiceError } from "../utils/normalizeServiceError";
@@ -100,14 +101,10 @@ export async function deleteProduct(productId: string): Promise<void> {
   }
 }
 
-type UpdateProductPayload = {
-  name: string;
-  description: string | null;
-  category_id: string;
-  price: number;
-  stock: number;
-  status: "active" | "draft" | "archived";
-};
+type UpdateProductPayload = Pick<
+  Product,
+  "name" | "description" | "category_id" | "price" | "stock" | "status"
+>;
 
 type UpdateProductProps = {
   productId: string;
