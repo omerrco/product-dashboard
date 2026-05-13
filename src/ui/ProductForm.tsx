@@ -16,15 +16,17 @@ export type ProductFormValues = {
 };
 
 type ProductFormProps = {
-  product: Product;
+  product?: Product;
   isSubmitting?: boolean;
   onSubmit: (values: ProductFormValues) => void;
+  submitLabel?: string;
 };
 
 export default function ProductForm({
   product,
   isSubmitting = false,
   onSubmit,
+  submitLabel = "Save product",
 }: ProductFormProps) {
   const { categories, isPending } = useCategories();
 
@@ -34,12 +36,12 @@ export default function ProductForm({
     formState: { errors },
   } = useForm<ProductFormValues>({
     defaultValues: {
-      name: product.name,
-      description: product.description ?? "",
-      category_id: product.category_id ?? "",
-      price: product.price,
-      stock: product.stock,
-      status: product.status,
+      name: product?.name ?? "",
+      description: product?.description ?? "",
+      category_id: product?.category_id ?? "",
+      price: product?.price ?? 0,
+      stock: product?.stock ?? 0,
+      status: product?.status ?? "active",
     },
   });
 
@@ -179,7 +181,7 @@ export default function ProductForm({
         </Link>
 
         <Button type="submit" disabled={isSubmitting}>
-          {isSubmitting ? "Saving..." : "Save changes"}
+          {isSubmitting ? "Saving..." : submitLabel}
         </Button>
       </div>
     </form>
