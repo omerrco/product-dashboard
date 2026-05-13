@@ -1,9 +1,25 @@
 import { LuArrowLeft } from "react-icons/lu";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import ProductForm, { type ProductFormValues } from "../ui/ProductForm";
+import { useCreateProduct } from "../features/products/useCreateProduct";
 
 export default function ProductCreatePage() {
-  const handleSubmit = (values: ProductFormValues) => {};
+  const navigate = useNavigate();
+  const { createProductMutation, isCreating } = useCreateProduct();
+
+  const handleSubmit = (values: ProductFormValues) => {
+    createProductMutation(
+      {
+        ...values,
+        description: values.description || null,
+      },
+      {
+        onSuccess: () => {
+          navigate("/products");
+        },
+      },
+    );
+  };
   return (
     <section className="grid gap-8">
       <div className="flex items-center justify-between gap-4">
@@ -27,7 +43,7 @@ export default function ProductCreatePage() {
 
       <ProductForm
         onSubmit={handleSubmit}
-        isSubmitting={false}
+        isSubmitting={isCreating}
         submitLabel="Create product"
       />
     </section>
