@@ -99,3 +99,40 @@ export async function deleteProduct(productId: string): Promise<void> {
     normalizeServiceError(error);
   }
 }
+
+type UpdateProductPayload = {
+  name: string;
+  description: string | null;
+  category_id: string;
+  price: number;
+  stock: number;
+  status: "active" | "draft" | "archived";
+};
+
+type UpdateProductProps = {
+  productId: string;
+  values: UpdateProductPayload;
+};
+
+export async function updateProduct({ productId, values }: UpdateProductProps) {
+  try {
+    const { data, error } = await supabase
+      .from("products")
+      .update(values)
+      .eq("id", productId)
+      .select(`*, categories!inner (id, name, slug)`)
+      .single();
+
+    if (error) {
+      throw new ServiceError(
+        "Product could not be updated. Please try again.",
+        "DATABASE",
+        error,
+      );
+    }
+
+    return data;
+  } catch (error) {
+    normalizeServiceError(error);
+  }
+}

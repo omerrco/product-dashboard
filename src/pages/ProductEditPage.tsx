@@ -1,13 +1,16 @@
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useProduct from "../features/products/useProduct";
 import ErrorMessage from "../ui/ErrorMessage";
 import Spinner from "../ui/Spinner";
 import { LuArrowLeft } from "react-icons/lu";
 
-import ProductForm from "../ui/ProductForm";
+import ProductForm, { type ProductFormValues } from "../ui/ProductForm";
+import { useUpdateProduct } from "../features/products/useUpdateProduct";
 
 export default function ProductEditPage() {
   const { product, isPending, isError, error, refetch } = useProduct();
+  const { updateProductMutation, isUpdating } = useUpdateProduct();
+  const navigate = useNavigate();
 
   if (isPending) return <Spinner label="Loading product..." />;
 
@@ -30,7 +33,26 @@ export default function ProductEditPage() {
     );
   }
 
-  const handleSubmit = () => {};
+  const handleSubmit = (values: ProductFormValues) => {
+    updateProductMutation(
+      {
+        productId: product.id,
+        values: {
+          name: values.name,
+          description: values.description || null,
+          category_id: values.category_id,
+          price: values.price,
+          stock: values.stock,
+          status: values.status,
+        },
+      },
+      {
+        onSuccess: () => {
+          navigate("/products");
+        },
+      },
+    );
+  };
 
   return (
     <section className="grid gap-8">
@@ -53,7 +75,11 @@ export default function ProductEditPage() {
         </Link>
       </div>
 
-      <ProductForm product={product} onSubmit={handleSubmit} />
+      <ProductForm
+        product={product}
+        onSubmit={handleSubmit}
+        isSubmitting={isUpdating}
+      />
     </section>
   );
 }

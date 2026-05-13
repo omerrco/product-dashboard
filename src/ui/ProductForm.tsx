@@ -6,7 +6,7 @@ import useCategories from "../features/products/useCategories";
 import { useForm } from "react-hook-form";
 import type { ReactNode } from "react";
 
-type ProductFormValues = {
+export type ProductFormValues = {
   name: string;
   description: string;
   category_id: string;
@@ -18,7 +18,7 @@ type ProductFormValues = {
 type ProductFormProps = {
   product: Product;
   isSubmitting?: boolean;
-  onSubmit: () => void;
+  onSubmit: (values: ProductFormValues) => void;
 };
 
 export default function ProductForm({
@@ -43,8 +43,8 @@ export default function ProductForm({
     },
   });
 
-  const submitForm = () => {
-    onSubmit();
+  const submitForm = (values: ProductFormValues) => {
+    onSubmit(values);
   };
 
   return (
