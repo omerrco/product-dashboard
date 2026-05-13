@@ -1,73 +1,59 @@
-# React + TypeScript + Vite
+# Product Dashboard
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+A work-in-progress product management dashboard built with React, TypeScript, React Query, React Router and Tailwind CSS.
 
-Currently, two official plugins are available:
+> This project is currently under active development.
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Overview
 
-## React Compiler
+Product Dashboard is a small frontend project focused on practicing production-like React patterns such as reusable components, server state management, CRUD operations, loading states, error handling and responsive dashboard layouts.
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+## Current Features
 
-## Expanding the ESLint configuration
+- Dashboard layout
+- Products list
+- Delete product confirmation modal
+- React Query mutation for deleting products
+- Reusable UI components
+- Tailwind CSS styling
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Planned Features
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- Add product form
+- Edit product form
+- Form validation
+- Search and filtering
+- Empty states
+- Better error states
+- Product detail page
+- Responsive improvements
+- Screenshots
+- Live demo
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+## Tech Stack
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- React
+- TypeScript
+- React Router
+- TanStack React Query
+- Tailwind CSS
+- Supabase
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## What I Am Practicing
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+In this project, I am focusing on:
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+- Building clean and reusable React components
+- Managing server state with React Query
+- Handling loading, error and empty states
+- Structuring a frontend project by features
+- Creating a modern dashboard UI with Tailwind CSS
+- Practicing real-world CRUD flows
+
+## Screenshots
+
+Screenshots will be added as the project progresses.
+
+## Status
+
+This project is currently in progress.
