@@ -48,7 +48,7 @@
   input,
   select,
   textarea {
-    @apply border-brand-200 w-full rounded-xl border bg-white/80 px-4 py-2 text-sm text-slate-700 shadow-sm transition outline-none placeholder:text-slate-400;
+    @apply border-brand-200 w-full rounded-xl border bg-white/80 px-3 py-2 text-sm text-slate-700 shadow-sm transition outline-none placeholder:text-slate-400;
   }
 
   input:focus,
