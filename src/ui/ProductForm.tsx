@@ -52,15 +52,26 @@ export default function ProductForm({
       onSubmit={handleSubmit(submitForm)}
       className="border-brand-100 rounded-2xl border bg-white/80 p-6 shadow-sm backdrop-blur-xl"
     >
-      <div className="grid gap-5 lg:grid-cols-2">
+      <div className="grid gap-x-5 gap-y-4 lg:grid-cols-2">
         <FormField label="Name" error={errors.name?.message}>
-          <input {...register("name")} placeholder="Product name" />
+          <input
+            {...register("name", {
+              required: "Name is required",
+              minLength: {
+                value: 3,
+                message: "Name must be at least 3 characters",
+              },
+            })}
+            placeholder="Product name"
+          />
         </FormField>
 
         <FormField label="Category" error={errors.category_id?.message}>
           <div className="relative">
             <select
-              {...register("category_id")}
+              {...register("category_id", {
+                required: "Please select a category",
+              })}
               disabled={isPending}
               className="appearance-none pr-10"
             >
@@ -78,20 +89,60 @@ export default function ProductForm({
           </div>
         </FormField>
 
-        <div className="grid gap-5 sm:grid-cols-2 lg:col-span-2">
+        <div className="grid gap-x-5 gap-y-4 sm:grid-cols-2 lg:col-span-2">
           <FormField label="Price" error={errors.price?.message}>
-            <input {...register("price")} type="number" min="0" step="0.01" />
+            <input
+              {...register("price", {
+                valueAsNumber: true,
+                required: "Price is required",
+                min: {
+                  value: 0.01,
+                  message: "Price must be greater than 0",
+                },
+              })}
+              onKeyDown={(e) => {
+                if (["e", "E", "+", "-"].includes(e.key)) {
+                  e.preventDefault();
+                }
+              }}
+              type="number"
+              min="0"
+              step="0.01"
+            />
           </FormField>
 
           <FormField label="Stock" error={errors.stock?.message}>
-            <input {...register("stock")} type="number" min="0" />{" "}
+            <input
+              {...register("stock", {
+                valueAsNumber: true,
+                required: "Stock is required",
+                min: {
+                  value: 0,
+                  message: "Stock cannot be negative",
+                },
+                validate: (value) =>
+                  Number.isInteger(value) || "Stock must be a whole number",
+              })}
+              onKeyDown={(e) => {
+                if (["e", "E", "+", "-"].includes(e.key)) {
+                  e.preventDefault();
+                }
+              }}
+              type="number"
+              min="0"
+            />
           </FormField>
         </div>
 
         <div className="lg:col-span-2">
           <FormField label="Description" error={errors.description?.message}>
             <textarea
-              {...register("description")}
+              {...register("description", {
+                maxLength: {
+                  value: 500,
+                  message: "Description cannot exceed 500 characters",
+                },
+              })}
               placeholder="Product description"
               rows={4}
             />
@@ -101,7 +152,12 @@ export default function ProductForm({
         <div className="sm:w-fit">
           <FormField label="Status" error={errors.status?.message}>
             <div className="relative">
-              <select {...register("status")} className="appearance-none pr-10">
+              <select
+                {...register("status", {
+                  required: "Status is required",
+                })}
+                className="appearance-none pr-10"
+              >
                 <option value="active">Active</option>
                 <option value="draft">Draft</option>
                 <option value="archived">Archived</option>
@@ -139,10 +195,13 @@ type FormFieldProps = {
 function FormField({ label, error, children }: FormFieldProps) {
   return (
     <div className="grid gap-2">
-      <label className="text-sm font-medium text-slate-700">{label}</label>
-      {children}
+      <label className="flex items-center text-sm font-medium text-slate-700">
+        {label}
 
-      {error && <p className="text-sm text-red-600">{error}</p>}
+        {error && <span className="ml-2 text-xs text-red-500">{error}</span>}
+      </label>
+
+      {children}
     </div>
   );
 }
