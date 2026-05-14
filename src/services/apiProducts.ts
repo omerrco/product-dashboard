@@ -155,3 +155,45 @@ export async function createProduct(values: ProductPayload) {
     normalizeServiceError(error);
   }
 }
+
+export async function getDashboardStats() {
+  try {
+    const { data: products, error } = await supabase
+      .from("products")
+      .select(`*, categories!inner (name)`);
+
+    if (error) {
+      throw new ServiceError(
+        "Dashboard stats could not be loaded. Please try again.",
+        "DATABASE",
+        error,
+      );
+    }
+
+    const totalProducts = products.length;
+    const activeProducts = products.filter(
+      (product) => product.status === "active",
+    ).length;
+    const lowStockProducts = products.filter((product) => product.stock <= 5);
+    const inventoryValue = products.reduce(
+      (acc, product) => acc + product.price * product.stock,
+      0,
+    );
+    const recentProducts = [...products]
+      .sort(
+        (a, b) =>
+          new Date(b.created_at).getTime() - new Date(a.created_at).getTime(),
+      )
+      .slice(0, 5);
+
+    return {
+      totalProducts,
+      activeProducts,
+      lowStockProducts,
+      inventoryValue,
+      recentProducts,
+    };
+  } catch (error) {
+    normalizeServiceError(error);
+  }
+}
