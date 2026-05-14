@@ -11,6 +11,7 @@ import AppLayout from "./ui/layout/AppLayout";
 import { ServiceError } from "./ui/ServiceError";
 import ProductEditPage from "./pages/ProductEditPage";
 import ProductCreatePage from "./pages/ProductCreatePage";
+import { Toaster } from "react-hot-toast";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -55,6 +56,18 @@ function App() {
 
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
+
+      <Toaster
+        position="top-center"
+        toastOptions={{
+          duration: 3000,
+          style: {
+            borderRadius: "14px",
+            background: "#fff",
+            color: "#0f172a",
+          },
+        }}
+      />
     </QueryClientProvider>
   );
 }

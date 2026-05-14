@@ -1,5 +1,6 @@
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { updateProduct } from "../../services/apiProducts";
+import toast from "react-hot-toast";
 
 export function useUpdateProduct() {
   const queryClient = useQueryClient();
@@ -8,6 +9,8 @@ export function useUpdateProduct() {
     mutationFn: updateProduct,
 
     onSuccess: (updatedProduct) => {
+      toast.success("Product updated successfully");
+
       queryClient.invalidateQueries({
         queryKey: ["products"],
       });
@@ -15,6 +18,10 @@ export function useUpdateProduct() {
       queryClient.invalidateQueries({
         queryKey: ["product", updatedProduct.id],
       });
+    },
+
+    onError: (error) => {
+      toast.error(error.message);
     },
   });
 
