@@ -158,7 +158,7 @@ export async function createProduct(values: ProductPayload) {
 
 export async function getDashboardStats() {
   try {
-    const { data: products, error } = await supabase
+    const { data, error } = await supabase
       .from("products")
       .select(`*, categories!inner (name)`);
 
@@ -169,6 +169,8 @@ export async function getDashboardStats() {
         error,
       );
     }
+
+    const products = data ?? [];
 
     const totalProducts = products.length;
     const activeProducts = products.filter(

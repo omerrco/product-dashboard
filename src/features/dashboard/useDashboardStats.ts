@@ -2,8 +2,8 @@ import { useQuery } from "@tanstack/react-query";
 import { getDashboardStats } from "../../services/apiProducts";
 
 export default function useDashboardStats() {
-  const { data, isPending, isError, error } = useQuery({
-    queryKey: ["dashboard"],
+  const { data, isPending, isError, error, refetch } = useQuery({
+    queryKey: ["dashboard-stats"],
     queryFn: getDashboardStats,
   });
 
@@ -12,5 +12,6 @@ export default function useDashboardStats() {
     isPending,
     isError,
     error,
+    refetch,
   };
 }
