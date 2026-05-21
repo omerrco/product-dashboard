@@ -3,6 +3,7 @@ import Pagination from "../../ui/Pagination";
 import Spinner from "../../ui/Spinner";
 import Table from "../../ui/Table";
 import ProductsActions from "./ProductsActions";
+import ProductStatusBadge from "./ProductStatusBadge";
 import useProducts from "./useProducts";
 
 export default function ProductsTable() {
@@ -55,8 +56,8 @@ export default function ProductsTable() {
               <div>{product.categories?.name ?? "No category"}</div>
               <div>${Number(product.price).toFixed(2)}</div>
               <div>{product.stock}</div>
-              <div className="bg-brand-50 text-brand-700 rounded-full px-2 py-1 text-sm font-medium">
-                {product.status}
+              <div>
+                <ProductStatusBadge status={product.status} />
               </div>
               <div>
                 <ProductsActions product={product} />
