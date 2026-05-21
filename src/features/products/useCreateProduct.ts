@@ -13,6 +13,10 @@ export function useCreateProduct() {
       queryClient.invalidateQueries({
         queryKey: ["products"],
       });
+
+      queryClient.invalidateQueries({
+        queryKey: ["dashboard-stats"],
+      });
     },
 
     onError: (error) => {

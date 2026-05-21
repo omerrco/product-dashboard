@@ -18,6 +18,10 @@ export function useUpdateProduct() {
       queryClient.invalidateQueries({
         queryKey: ["product", updatedProduct.id],
       });
+
+      queryClient.invalidateQueries({
+        queryKey: ["dashboard-stats"],
+      });
     },
 
     onError: (error) => {

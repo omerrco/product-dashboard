@@ -11,6 +11,10 @@ export default function useDeleteProduct() {
     onSuccess: () => {
       toast.success("Product deleted successfully");
       queryClient.invalidateQueries({ queryKey: ["products"] });
+
+      queryClient.invalidateQueries({
+        queryKey: ["dashboard-stats"],
+      });
     },
 
     onError: (error) => {
