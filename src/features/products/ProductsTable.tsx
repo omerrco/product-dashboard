@@ -4,6 +4,7 @@ import Spinner from "../../ui/Spinner";
 import Table from "../../ui/Table";
 import ProductsActions from "./ProductsActions";
 import ProductStatusBadge from "./ProductStatusBadge";
+import ProductStockBadge from "./ProductStockBadge";
 import useProducts from "./useProducts";
 
 export default function ProductsTable() {
@@ -55,7 +56,9 @@ export default function ProductsTable() {
               </div>
               <div>{product.categories?.name ?? "No category"}</div>
               <div>${Number(product.price).toFixed(2)}</div>
-              <div>{product.stock}</div>
+              <div>
+                <ProductStockBadge stock={product.stock} />
+              </div>
               <div>
                 <ProductStatusBadge status={product.status} />
               </div>
