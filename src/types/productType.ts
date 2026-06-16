@@ -1,5 +1,11 @@
 export type ProductStatus = "active" | "draft" | "archived";
 
+export type Category = {
+  id: string;
+  name: string;
+  slug: string;
+};
+
 export type Product = {
   id: string;
   name: string;
@@ -10,8 +16,5 @@ export type Product = {
   image_url: string | null;
   status: ProductStatus;
   created_at: string;
-  categories: {
-    id: string;
-    name: string;
-  } | null;
+  categories: Category | null;
 };
