@@ -16,8 +16,10 @@ export default function AppLayout() {
         onCloseMobile={() => setIsMobileSidebarOpen(false)}
       />
 
-      <main className="area-main px-10 py-8">
-        <Outlet />
+      <main className="area-main min-w-0">
+        <div className="page-container">
+          <Outlet />
+        </div>
       </main>
     </div>
   );
