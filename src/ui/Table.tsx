@@ -1,5 +1,4 @@
 import { createContext, useContext, type ReactNode } from "react";
-import { Link } from "react-router-dom";
 
 type TableContextValue = {
   columns: string;
@@ -27,7 +26,7 @@ function Table({ columns, children }: TableProps) {
     <TableContext.Provider value={{ columns }}>
       <div
         role="table"
-        className="border-brand-100 grid overflow-hidden rounded-2xl border bg-white/60 shadow-sm backdrop-blur-xl"
+        className="grid overflow-hidden rounded-lg border border-slate-200 bg-white shadow-sm"
       >
         {children}
       </div>
@@ -46,7 +45,7 @@ function Header({ children }: ChildrenProps) {
     <div
       role="row"
       style={{ gridTemplateColumns: columns }}
-      className="border-brand-100 bg-brand-100/60 grid items-center justify-items-end border-b px-5 py-3 text-xs font-semibold tracking-wide text-slate-500 uppercase"
+      className="grid items-center border-b border-slate-200 bg-slate-50 px-5 py-3 text-xs font-semibold tracking-wide text-slate-500 uppercase"
     >
       {children}
     </div>
@@ -59,29 +58,10 @@ function Row({ children }: ChildrenProps) {
     <div
       role="row"
       style={{ gridTemplateColumns: columns }}
-      className="border-brand-100 hover:bg-brand-50/80 grid items-center justify-items-end border-b px-5 py-4 text-sm text-slate-700 transition last:border-b-0"
+      className="grid items-center border-b border-slate-100 px-5 py-4 text-sm text-slate-700 transition last:border-b-0 hover:bg-slate-50"
     >
       {children}
     </div>
-  );
-}
-
-type RowLinkProps = {
-  children: ReactNode;
-  to: string;
-};
-
-function RowLink({ children, to }: RowLinkProps) {
-  const { columns } = useTable();
-  return (
-    <Link
-      to={to}
-      role="row"
-      style={{ gridTemplateColumns: columns }}
-      className="border-brand-100 hover:bg-brand-50/80 grid items-center justify-items-end border-b px-5 py-4 text-sm text-slate-700 transition last:border-b-0"
-    >
-      {children}
-    </Link>
   );
 }
 
@@ -91,7 +71,7 @@ function Body({ children }: ChildrenProps) {
 
 function Footer({ children }: ChildrenProps) {
   return (
-    <div className="border-brand-100 flex justify-end border-t bg-white/60 px-5 py-4 text-sm text-slate-500">
+    <div className="flex justify-end border-t border-slate-200 bg-slate-50 px-5 py-3 text-sm text-slate-500">
       {children}
     </div>
   );
@@ -100,7 +80,6 @@ function Footer({ children }: ChildrenProps) {
 Table.Header = Header;
 Table.Body = Body;
 Table.Row = Row;
-Table.RowLink = RowLink;
 Table.Footer = Footer;
 
 export default Table;
