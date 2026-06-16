@@ -38,15 +38,15 @@ const queryClient = new QueryClient({
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
-      <ReactQueryDevtools initialIsOpen={false} />
+      {import.meta.env.DEV && <ReactQueryDevtools initialIsOpen={false} />}
 
       <Routes>
         <Route element={<AppLayout />}>
           <Route index element={<Navigate replace to="dashboard" />} />
           <Route path="dashboard" element={<DashboardPage />} />
           <Route path="products" element={<ProductsPage />} />
+          <Route path="products/new" element={<ProductCreatePage />} />
           <Route path="products/:productId" element={<ProductPage />} />
-          <Route path="products/newProduct" element={<ProductCreatePage />} />
           <Route
             path="products/:productId/edit"
             element={<ProductEditPage />}
