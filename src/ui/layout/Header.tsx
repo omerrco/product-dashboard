@@ -7,19 +7,21 @@ type HeaderProps = {
 
 export default function Header({ onMenuClick }: HeaderProps) {
   return (
-    <header className="border-brand-100 area-header flex items-center justify-between border-b bg-white/70 px-6 backdrop-blur-xl">
-      <button onClick={onMenuClick} className="lg:hidden">
+    <header className="area-header flex items-center border-b border-b-slate-100 bg-white px-4 sm:px-6">
+      <button
+        onClick={onMenuClick}
+        className="rounded-md p-2 text-slate-600 transition hover:bg-slate-100 lg:hidden"
+        aria-label="Open navigation"
+      >
         <LuMenu size={24} />
       </button>
 
       <NavLink
         to="/"
-        className="text-xl font-bold tracking-tight text-slate-900"
+        className="mx-auto text-xl font-bold tracking-tight text-slate-900 lg:mx-0"
       >
         Product Dashboard
       </NavLink>
-
-      <div>admin</div>
     </header>
   );
 }
