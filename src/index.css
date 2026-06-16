@@ -9,17 +9,17 @@
 }
 
 @theme {
-  --color-brand-50: #fff7ed;
-  --color-brand-100: #ffedd5;
-  --color-brand-200: #fed7aa;
-  --color-brand-300: #fdba74;
-  --color-brand-400: #fb923c;
-  --color-brand-500: #f97316;
-  --color-brand-600: #ea580c;
-  --color-brand-700: #c2410c;
-  --color-brand-800: #9a3412;
-  --color-brand-900: #7c2d12;
-  --color-brand-950: #431407;
+  --color-brand-50: #eef2ff;
+  --color-brand-100: #e0e7ff;
+  --color-brand-200: #c7d2fe;
+  --color-brand-300: #a5b4fc;
+  --color-brand-400: #818cf8;
+  --color-brand-500: #6366f1;
+  --color-brand-600: #4f46e5;
+  --color-brand-700: #4338ca;
+  --color-brand-800: #3730a3;
+  --color-brand-900: #312e81;
+  --color-brand-950: #1e1b4b;
 
   --color-accent-50: #ecfeff;
   --color-accent-100: #cffafe;
@@ -36,7 +36,7 @@
 
 @layer base {
   body {
-    @apply bg-brand-50 min-h-screen text-slate-900 antialiased;
+    @apply min-h-screen bg-slate-50 text-slate-900 antialiased;
     font-family:
       "Inter",
       ui-sans-serif system-ui,
@@ -48,13 +48,13 @@
   input,
   select,
   textarea {
-    @apply border-brand-200 w-full rounded-xl border bg-white/80 px-3 py-2 text-sm text-slate-700 shadow-sm transition outline-none placeholder:text-slate-400;
+    @apply w-full rounded-md border border-slate-300 bg-white px-3 py-2 text-sm text-slate-700 shadow-sm transition outline-none placeholder:text-slate-400;
   }
 
   input:focus,
   select:focus,
   textarea:focus {
-    @apply border-brand-300 ring-brand-400/20 ring-2;
+    @apply border-brand-300 ring-brand-500/15 ring-3;
   }
 
   button {
@@ -64,18 +64,7 @@
 
 @layer utilities {
   .bg-app {
-    background:
-      radial-gradient(
-        circle at top left,
-        rgba(251, 146, 60, 0.28),
-        transparent 32%
-      ),
-      radial-gradient(
-        circle at bottom right,
-        rgba(253, 186, 116, 0.35),
-        transparent 30%
-      ),
-      linear-gradient(135deg, #fff7ed, #fffbeb 48%, #ffffff);
+    background: #f8fafc;
   }
 
   .layout {
@@ -110,10 +99,14 @@
   }
 
   .card {
-    @apply rounded-2xl border border-orange-100 bg-white/75 shadow-sm backdrop-blur-xl;
+    @apply rounded-xl border border-slate-200 bg-white shadow-sm;
   }
 
   .glass {
-    @apply border border-white/70 bg-white/65 shadow-sm backdrop-blur-xl;
+    @apply border border-slate-200 bg-white shadow-sm;
+  }
+
+  .page-container {
+    @apply mx-auto w-full max-w-7xl px-4 py-6 sm:px-6 lg:px-8;
   }
 }
