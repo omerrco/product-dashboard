@@ -8,14 +8,14 @@ type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
 };
 
 const base =
-  "inline-flex items-center justify-center rounded-xl px-4 py-2 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-60";
+  "inline-flex items-center justify-center rounded-lg px-4 py-2 text-sm font-semibold transition disabled:cursor-not-allowed disabled:opacity-60";
 
 const styles = {
   primary:
-    "bg-brand-500 text-white shadow-sm shadow-brand-500/30 hover:bg-brand-600",
+    "bg-brand-600 text-white shadow-sm shadow-brand-600/20 hover:bg-brand-700",
   secondary:
-    "border border-orange-200 bg-white/80 text-slate-700 hover:bg-orange-50",
-  danger: "bg-red-500 text-white shadow-sm shadow-red-500/30 hover:bg-red-600",
+    "border border-slate-300 bg-white text-slate-700 hover:bg-slate-50",
+  danger: "bg-red-600 text-white shadow-sm shadow-red-600/20 hover:bg-red-700",
 };
 
 export default function Button({
